@@ -16,6 +16,7 @@ Arquitetura de sistemas
 Objetivos e Introduçao
 - FrameWorks -> Boas Praticas , Reuso , Releases Constantes
 - Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
+  
                             Computador A {porta ------------- porta} Computador B
 - Computador A = Receber , recieve, read = DESSERIALIZAR 
 - Computador B = enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
