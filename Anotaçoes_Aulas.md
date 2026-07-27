@@ -7,10 +7,9 @@
 - Nao tera Provas em si , serão trabalhos avaliativos com apresentaçao no quadro
 
 
-# Introduçao Da Disciplina
+# Introduçao da Disciplina
 Arquitetura de sistemas
   1) Cliente-Servidor -> Modelo TCP/IP - Pratvico x Teorico OSI = 7 camadas
      Camadas = Aplicaçao,, Apresentacao , Sessao ,  Transporte , Rede , enlaçe , Fisica
   2) FrameWorks -> Boas Praticas , Reuso , Releases Constantes
-
-
+  3) Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
