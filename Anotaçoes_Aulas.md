@@ -1,4 +1,4 @@
-# Aula 1 (27/07/2026) - Introduçao a Disciplina e Pedidos do Professor
+# Aula 1 (27/07/2026) - Pedidos do Professor e Introduçao a Disciplina 
 
 # Pedidos do Professor
 - Todos os codigos devem ser orientado a objetos
@@ -12,14 +12,14 @@
   1) Cliente-Servidor -> Modelo TCP/IP - Pratvico x Teorico OSI = 7 camadas
      Camadas = Aplicaçao,, Apresentacao , Sessao ,  Transporte , Rede , enlaçe , Fisica
   2) Ponto-a-Ponto -> Modelo TCP/IP
+     
+         Computador A {porta ------------- porta} Computador B
+- Computador A = Receber , recieve, read = DESSERIALIZAR 
+- Computador B = enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
 
 **Objetivos e Introduçao**
 - FrameWorks -> Boas Praticas , Reuso , Releases Constantes
 - Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
-  
-                            Computador A {porta ------------- porta} Computador B
-- Computador A = Receber , recieve, read = DESSERIALIZAR 
-- Computador B = enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
   
 **Threads**
 - Threads é Programaçao Concomitante =! Paralelo, Concomitante, pois as threads sempre estao competindo a mesma linha
