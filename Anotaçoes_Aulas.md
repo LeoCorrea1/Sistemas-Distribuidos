@@ -11,5 +11,11 @@
 Arquitetura de sistemas
   1) Cliente-Servidor -> Modelo TCP/IP - Pratvico x Teorico OSI = 7 camadas
      Camadas = Aplicaçao,, Apresentacao , Sessao ,  Transporte , Rede , enlaçe , Fisica
-  2) FrameWorks -> Boas Praticas , Reuso , Releases Constantes
-  3) Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
+  2) Ponto-a-Ponto -> Modelo TCP/IP
+
+Objetivos e Introduçao
+ FrameWorks -> Boas Praticas , Reuso , Releases Constantes
+ Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
+
+                            Computador A {porta 10 ------------- porta 10}  Computador B
+Receber ,recieve, read = DESSERIALIZAR _)                                 (_ enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
