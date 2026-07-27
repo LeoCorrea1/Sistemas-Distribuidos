@@ -14,9 +14,9 @@ Arquitetura de sistemas
   2) Ponto-a-Ponto -> Modelo TCP/IP
 
 Objetivos e Introduçao
- FrameWorks -> Boas Praticas , Reuso , Releases Constantes
- Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
+ -FrameWorks -> Boas Praticas , Reuso , Releases Constantes
+ -Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
 
                             Computador A {porta 10 ------------- porta 10}  Computador B
-Computador A = Receber , recieve, read = DESSERIALIZAR 
-Computador B = enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
+-Computador A = Receber , recieve, read = DESSERIALIZAR 
+-Computador B = enviar = send - whrite ( Bytes, String, Objetos ) = SERIALIZAR
