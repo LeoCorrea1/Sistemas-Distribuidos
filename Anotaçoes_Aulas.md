@@ -37,11 +37,11 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 
 **Arquitetura e Pilares**
 
-- Comunicação: Ligação direta ponto a ponto entre os componentes.
-- Resiliência: Alta capacidade de tolerância a falhas para evitar quedas bruscas.
-- Crescimento: Escalabilidade pensada para expansão contínua.
-- Proteção: Foco total em segurança da informação.
-- Suporte: Processos simplificados de manutenção e atualização.
+Comunicação: Ligação direta ponto a ponto entre os componentes.
+Resiliência: Alta capacidade de tolerância a falhas para evitar quedas bruscas.
+Crescimento: Escalabilidade pensada para expansão contínua.
+Proteção: Foco total em segurança da informação.
+Suporte: Processos simplificados de manutenção e atualização.
 
 **O Grande Objetivo**
 - Compartilhar recursos de hardware pesados, especialmente processador e memória, para otimizar o desempenho.
