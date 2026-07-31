@@ -22,10 +22,10 @@
 - Um dos Objetivos da materia, seria coneseguir que um computador se comunique com outro, sem delay, como se fosse um "espelho" do outro, por meio de um servidor, claro, sendo programado a mão
   
 **Threads**
-- Threads é Programaçao Concomitante =! Paralelo, Concomitante, pois as threads sempre estao competindo a mesma linha
-- São mini processos, que utilizam memoria + cpu, possuem tempo de vida, e seu criador ( PAI ) , se o processo do pai é cortado, o processo filho tambem, pois é dependente
-- Gerenciamento de uma Thread -> Declarar e envelopar , iniciar, pausar , reiniciar , finalizar ou matar
-- Threads que compartilham memoria devem ter tratamento de race condition ( condiçao de corrida, sessao critica ) tudo que a gente viu em sistemas operacionais
+Threads é Programaçao Concomitante =! Paralelo, Concomitante, pois as threads sempre estao competindo a mesma linha
+São mini processos, que utilizam memoria + cpu, possuem tempo de vida, e seu criador ( PAI ) , se o processo do pai é cortado, o processo filho tambem, pois é dependente
+Gerenciamento de uma Thread -> Declarar e envelopar , iniciar, pausar , reiniciar , finalizar ou matar
+Threads que compartilham memoria devem ter tratamento de race condition ( condiçao de corrida, sessao critica ) tudo que a gente viu em sistemas operacionais
 
 # Aula 2 (31/07/2026) - Resumo Sistemas Distribuidos e Sistemas Paralelos
 
