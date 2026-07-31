@@ -12,6 +12,10 @@
   1) Cliente-Servidor -> Modelo TCP/IP - Pratvico x Teorico OSI = 7 camadas
      Camadas = Aplicaçao,, Apresentacao , Sessao ,  Transporte , Rede , enlaçe , Fisica
   2) Ponto-a-Ponto -> Modelo TCP/IP
+- Tolerância a falhas
+- Escalabilidade
+- Segurança
+- Manutenção/atualização
      
          Computador A {porta ------------- porta} Computador B
 - Computador A = Receber , recieve, read = DESSERIALIZAR 
@@ -29,19 +33,31 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 
 # Aula 2 (31/07/2026) - Resumo Sistemas Distribuidos e Sistemas Paralelos
 
-**Sistemas Paralelos**
+# Sistemas Paralelos
 
-- Padrão único: Hardware, sistema operacional e linguagens de programação exatamente iguais em todas as máquinas.
-- Super conectados: Fortemente acoplados no mesmo ambiente físico por meio dos protocolos TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
-- Exemplo prático: A boa e velha estrutura de um cluster computacional.
+**O que são :**
+Padrão único: Hardware, sistema operacional e linguagens de programação idênticos em todas as máquinas.
+Super conectados: Fortemente acoplados fisicamente via TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
+Na prática: Estrutura típica de um *cluster* computacional.
 
-**Arquitetura e Pilares**
+**Arquitetura & Pilares:**
+Comunicação: Direta, estilo ponto a ponto.
+Resiliência: Tolerância a falhas reforçada para evitar quedas.
+Proteção: Foco forte em segurança.
+Suporte: Manutenção e atualizações simplificadas.
 
-Comunicação: Ligação direta ponto a ponto entre os componentes.
-Resiliência: Alta capacidade de tolerância a falhas para evitar quedas bruscas.
-Crescimento: Escalabilidade pensada para expansão contínua.
-Proteção: Foco total em segurança da informação.
-Suporte: Processos simplificados de manutenção e atualização.
+**Meta Principal:**
+Compartilhar recursos pesados (processador e memória) para turbinar o desempenho.
 
-**O Grande Objetivo**
-- Compartilhar recursos de hardware pesados, especialmente processador e memória, para otimizar o desempenho.
+# Sistemas Distribuídos
+Características: Heterogêneos, fracamente acoplados via TCP/IP.
+Arquiteturas: Cliente-Servidor, P2P e Híbrido.
+Desafios: Tolerância a falhas, escalabilidade, segurança e sincronismo (relógios e exclusão mútua).
+
+**Comunicação e Threads**
+Sockets: Comunicação bloqueante (leitura/escrita).
+Threads: Miniprocessos para garantir concorrência e liberar o fluxo bloqueante dos sockets.
+
+**Tipos:**
+Com compartilhamento: Exige controle manual de sincronismo (Runnable em Java, tratamento de race condition).
+Sem compartilhamento: Execução independente (Classe Thread em Java).
