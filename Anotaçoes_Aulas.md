@@ -26,3 +26,22 @@
 - São mini processos, que utilizam memoria + cpu, possuem tempo de vida, e seu criador ( PAI ) , se o processo do pai é cortado, o processo filho tambem, pois é dependente
 - Gerenciamento de uma Thread -> Declarar e envelopar , iniciar, pausar , reiniciar , finalizar ou matar
 - Threads que compartilham memoria devem ter tratamento de race condition ( condiçao de corrida, sessao critica ) tudo que a gente viu em sistemas operacionais
+
+# Aula 2 (31/07/2026) - Resumo Sistemas Distribuidos e Sistemas Paralelos
+
+## **Sistemas Paralelos**
+
+- Padrão único: Hardware, sistema operacional e linguagens de programação exatamente iguais em todas as máquinas.
+- Super conectados: Fortemente acoplados no mesmo ambiente físico por meio dos protocolos TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
+- Exemplo prático: A boa e velha estrutura de um cluster computacional.
+
+**Arquitetura e Pilares**
+
+- Comunicação: Ligação direta ponto a ponto entre os componentes.
+- Resiliência: Alta capacidade de tolerância a falhas para evitar quedas bruscas.
+- Crescimento: Escalabilidade pensada para expansão contínua.
+- Proteção: Foco total em segurança da informação.
+- Suporte: Processos simplificados de manutenção e atualização.
+
+**O Grande Objetivo**
+Compartilhar recursos de hardware pesados, especialmente processador e memória, para otimizar o desempenho.
