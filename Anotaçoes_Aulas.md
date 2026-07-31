@@ -36,28 +36,28 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 # Sistemas Paralelos
 
 **O que são :**
-Padrão único: Hardware, sistema operacional e linguagens de programação idênticos em todas as máquinas.
-Super conectados: Fortemente acoplados fisicamente via TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
-Na prática: Estrutura típica de um *cluster* computacional.
+- Padrão único: Hardware, sistema operacional e linguagens de programação idênticos em todas as máquinas.
+- Super conectados: Fortemente acoplados fisicamente via TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
+- Na prática: Estrutura típica de um *cluster* computacional.
 
 **Arquitetura & Pilares:**
-Comunicação: Direta, estilo ponto a ponto.
-Resiliência: Tolerância a falhas reforçada para evitar quedas.
-Proteção: Foco forte em segurança.
-Suporte: Manutenção e atualizações simplificadas.
+- Comunicação: Direta, estilo ponto a ponto.
+- Resiliência: Tolerância a falhas reforçada para evitar quedas.
+- Proteção: Foco forte em segurança.
+- Suporte: Manutenção e atualizações simplificadas.
 
 **Meta Principal:**
-Compartilhar recursos pesados (processador e memória) para turbinar o desempenho.
+- Compartilhar recursos pesados (processador e memória) para turbinar o desempenho.
 
 # Sistemas Distribuídos
-Características: Heterogêneos, fracamente acoplados via TCP/IP.
-Arquiteturas: Cliente-Servidor, P2P e Híbrido.
-Desafios: Tolerância a falhas, escalabilidade, segurança e sincronismo (relógios e exclusão mútua).
+- Características: Heterogêneos, fracamente acoplados via TCP/IP.
+- Arquiteturas: Cliente-Servidor, P2P e Híbrido.
+- Desafios: Tolerância a falhas, escalabilidade, segurança e sincronismo (relógios e exclusão mútua).
 
 **Comunicação e Threads**
-Sockets: Comunicação bloqueante (leitura/escrita).
-Threads: Miniprocessos para garantir concorrência e liberar o fluxo bloqueante dos sockets.
+- Sockets: Comunicação bloqueante (leitura/escrita).
+- Threads: Miniprocessos para garantir concorrência e liberar o fluxo bloqueante dos sockets.
 
 **Tipos:**
-Com compartilhamento: Exige controle manual de sincronismo (Runnable em Java, tratamento de race condition).
-Sem compartilhamento: Execução independente (Classe Thread em Java).
+- Com compartilhamento: Exige controle manual de sincronismo (Runnable em Java, tratamento de race condition).
+- Sem compartilhamento: Execução independente (Classe Thread em Java).
