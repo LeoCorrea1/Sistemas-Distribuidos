@@ -29,7 +29,7 @@
 
 # Aula 2 (31/07/2026) - Resumo Sistemas Distribuidos e Sistemas Paralelos
 
-## **Sistemas Paralelos**
+**Sistemas Paralelos**
 
 - Padrão único: Hardware, sistema operacional e linguagens de programação exatamente iguais em todas as máquinas.
 - Super conectados: Fortemente acoplados no mesmo ambiente físico por meio dos protocolos TCP/IP (endereço de rede, porta lógica, máscara e protocolos de transporte).
@@ -44,4 +44,4 @@
 - Suporte: Processos simplificados de manutenção e atualização.
 
 **O Grande Objetivo**
-Compartilhar recursos de hardware pesados, especialmente processador e memória, para otimizar o desempenho.
+- Compartilhar recursos de hardware pesados, especialmente processador e memória, para otimizar o desempenho.
