@@ -50,9 +50,15 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 - Compartilhar recursos pesados (processador e memória) para turbinar o desempenho.
 
 # Sistemas Distribuídos
-- Características: Heterogêneos, fracamente acoplados via TCP/IP.
-- Arquiteturas: Cliente-Servidor, P2P e Híbrido.
-- Desafios: Tolerância a falhas, escalabilidade, segurança e sincronismo (relógios e exclusão mútua).
+
+**Características:** 
+- Heterogêneos, fracamente acoplados via TCP/IP.
+
+**Arquiteturas:**
+- Cliente-Servidor, P2P e Híbrido.
+
+**Desafios:** 
+- Tolerância a falhas, escalabilidade, segurança e sincronismo (relógios e exclusão mútua).
 
 **Comunicação e Threads**
 - Sockets: Comunicação bloqueante (leitura/escrita).
