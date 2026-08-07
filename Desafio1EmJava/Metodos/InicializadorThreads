@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class InicializadorThreads {
+        ArrayList<Integer> listaA = new ArrayList<>();
+        Random gerador = new Random();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                listaA.add(gerador.nextInt(200));
+            }
+        });
+        t1.start();
+
+        ArrayList<Integer> listaA = new ArrayList<>();
+
+        TarefaPopular t3 = new TarefaPopular(listaA, 10000);
+        t2.start();
+
+
+        t1.join();
+        t2.join();
+
+
+        System.out.println(" listaA: " + listaA);
+
+    }
