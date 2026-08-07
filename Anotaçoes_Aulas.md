@@ -67,3 +67,28 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 **Tipos:**
 - Com compartilhamento: Exige controle manual de sincronismo (Runnable em Java, tratamento de race condition).
 - Sem compartilhamento: Execução independente (Classe Thread em Java).
+
+# Aula 3 (03/08/2026) - Não pude Comparecer - Exame Pessoal
+
+-Professor Iniciou a demonstrar na pratica oque foi apresentado nas aulas passadas ( codigo em python )
+
+# Aula 4 (07/08/2026) - Continuação Threads Python
+
+**Cliente-Servidor:** 
+- Existe um "centralizador". É aquele esquema tradicional em que o seu computador só pede as coisas e um servidor principal responde e entrega.
+- É super fácil de organizar e controlar, mas tem um detalhe: se esse servidor cair, todo mundo fica na mão e o serviço para.
+
+**Ponto-a-Ponto (P2P):**
+- Não existe um chefe. Todo mundo na rede conversa direto entre si, funcionando ao mesmo tempo como quem pede e quem entrega a informação tipo no BitTorrent. 
+- A grande vantagem é que, se o computador de alguém desligar, a rede continua funcionando normalmente e aguenta muito mais gente conectada ao mesmo tempo.
+
+**Comunicação** : 
+- É a forma como as máquinas trocam mensagens pela rede para conseguir cooperar. O desafio é que a rede falha, a mensagem pode se perder ou atrasar, e sem essa troca eficiente o sistema nem existe.
+  
+**Sincronismo** : 
+- É a coordenação para colocar ordem na casa, garantindo que as ações aconteçam no momento certo e sem conflitos (como evitar que dois nós alterem o mesmo dado ao mesmo tempo).
+- É a parte mais complexa porque não existe um relógio global perfeito por isso, dependem de relógios lógicos e algoritmos de consenso (como Raft) para manter tudo alinhado e consistente.
+
+
+
+
