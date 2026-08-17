@@ -28,6 +28,10 @@ public class Principal {
         double totalGeral = t1.getTotalLocal() + t2.getTotalLocal() +
                 t3.getTotalLocal() + t4.getTotalLocal();
 
-        System.out.printf("Faturamento Total do Evento: R$" + totalGeral);
+        System.out.printf("Faturamento pela Thread 1: R$ %.2f%n", t1.getTotalLocal());
+        System.out.printf("Faturamento pela Thread 2: R$ %.2f%n", t2.getTotalLocal());
+        System.out.printf("Faturamento pela Thread 3: R$ %.2f%n", t3.getTotalLocal());
+        System.out.printf("Faturamento pela Thread 4: R$ %.2f%n", t4.getTotalLocal());
+        System.out.printf("Faturamento Total do Evento: R$ %.2f%n", totalGeral);
     }
 }
