@@ -13,11 +13,6 @@ public class ThreadDeTrabalho extends Thread {
     public void run() {
         for (int i = 0; i < quantidadeFichas; i++) {
             fazerVenda.realizarVenda();
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
         }
     }
 }
