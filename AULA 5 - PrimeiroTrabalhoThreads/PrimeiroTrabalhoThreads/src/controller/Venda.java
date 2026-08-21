@@ -5,7 +5,7 @@ import model.SaldoCentral;
 public class Venda {
     private final SaldoCentral sd = new SaldoCentral();
 
-    public synchronized void realizarVenda() {
+    public void realizarVenda() {
         sd.adicionarSaldo(10.00);
     }
 
