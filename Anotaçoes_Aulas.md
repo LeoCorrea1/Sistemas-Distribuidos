@@ -92,6 +92,7 @@ Threads que compartilham memoria devem ter tratamento de race condition ( condi�
 # Aula 7 (17/08/2026) - Primeiro trabalho
 
 **Exercício 1: Caixas de Evento (Com Compartilhamento de Memória)**
+
 Objetivo: 5 threads somam 1.000 vendas de R$ 10,00 cada na variável saldo_central.
 
 Resultado esperado: R$ 50.000,00.
@@ -99,6 +100,7 @@ Resultado esperado: R$ 50.000,00.
 Avalia: Sincronização e controle de condição de corrida (Lock / synchronized).
 
 **Exercício 2: Relatório de Filiais (Sem Compartilhamento de Memória)**
+
 Objetivo: 4 threads calculam a soma local de 4 listas isoladas (vendas de filiais).
 
 Resultado esperado: Thread principal aguarda todas (join) e realiza a soma final.
