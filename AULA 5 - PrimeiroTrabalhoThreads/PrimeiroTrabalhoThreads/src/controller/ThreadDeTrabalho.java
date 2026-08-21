@@ -1,18 +1,18 @@
 package controller;
 
 public class ThreadDeTrabalho extends Thread {
-    private final Venda vendaService;
+    private final Venda fazerVenda;
     private final int quantidadeFichas;
 
-    public ThreadDeTrabalho(Venda vendaService, int quantidadeFichas) {
-        this.vendaService = vendaService;
+    public ThreadDeTrabalho(Venda fazerVenda, int quantidadeFichas) {
+        this.fazerVenda = fazerVenda;
         this.quantidadeFichas = quantidadeFichas;
     }
 
     @Override
     public void run() {
         for (int i = 0; i < quantidadeFichas; i++) {
-            vendaService.realizarVenda();
+            fazerVenda.realizarVenda();
             try {
                 Thread.sleep(0);
             } catch (InterruptedException e) {
