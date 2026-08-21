@@ -14,7 +14,7 @@ public class ThreadDeTrabalho extends Thread {
         for (int i = 0; i < quantidadeFichas; i++) {
             vendaService.realizarVenda();
             try {
-                Thread.sleep(1);
+                Thread.sleep(0);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

@@ -10,7 +10,7 @@ public class Filial {
     public Filial(int quantidade) {
         Random random = new Random();
         for (int i = 0; i < quantidade; i++) {
-            vendas.add(1 + random.nextDouble() * 10.0);;
+            vendas.add(1 + random.nextDouble() * 2);;
         }
     }
 
