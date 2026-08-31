@@ -103,6 +103,31 @@ Objetivo: 4 threads calculam a soma local de 4 listas isoladas (vendas de filiai
 
 Resultado esperado: Thread principal aguarda todas (join) e realiza a soma tudo
 
+# Aula 8 (24/08/2026) - Revisao para prova
+
+Foi feita a revisão de todo conteúdo para prova na sexta feira
+
+# Aula 9 (28/08/2026) - Primeira Prova
+
+Dia da prova teórica 
+
+# Aula 10 (31/08/2026) - Discussão sobre a Prova
+
+Foi discutido as questões da prova
+
+A que eu tive mais dificuldade foi a ultima ( sobre as características para garantir exclusão mutua ) , e foi isso que o zamba falou : 
+
+Que seria sincronização, locks e etc ( oque eu respondi )
+
+
+
+
+
+
+
+
+  
+
 
 
 
