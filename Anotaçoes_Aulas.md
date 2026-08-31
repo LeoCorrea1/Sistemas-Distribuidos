@@ -119,6 +119,7 @@ A que eu tive mais dificuldade foi a ultima ( sobre as características para gar
 
 Que seria sincronização, locks e etc ( oque eu respondi )
 
+E começamos a ver o conteúdo sobre Sockets
 
 
 
