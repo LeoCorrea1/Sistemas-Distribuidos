@@ -121,6 +121,11 @@ Que seria sincronização, locks e etc ( oque eu respondi )
 
 E começamos a ver o conteúdo sobre Sockets
 
+# Aula 11 (04/09/2026) - SERVER SOCKET
+
+Na aula de hoje foi introduzido a ideia de Server Socket e cliente ( 1:1 ), introduzido a ideia de um minichat = terminal
+
+
 
 
 
