@@ -143,11 +143,16 @@ private DefaultTableModel modelo;
                 ServidorTCP s = new ServidorTCP();
                 try{
                 s.salvarPessoas(pessoas,nomeDoTXT);
+                JOptionPane.showMessageDialog(this,"Arquivo Salvo/Atualizado com Sucesso"); 
+                
                 }catch(Exception e) {
                      JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage()); 
                 }
     }//GEN-LAST:event_salvarArquivoBtnActionPerformed
 
+private void log(String texto) {
+        logTxtA.append(texto + "\n");
+}
     
     private void iniciarServidor() {
 
@@ -171,7 +176,17 @@ private DefaultTableModel modelo;
         logTxtA.append("Erro: " + e.getMessage() + "\n");
     }
 }
+   
+private void adicionarTabela(Pessoa pessoa) {
 
+        modelo.addRow(new Object[]{
+            pessoa.getNome(),
+            pessoa.getDataNascimento(),
+            pessoa.getEmail()
+        });
+
+} 
+   
 private void atenderCliente(Socket cliente) {
 
     try {
@@ -196,6 +211,7 @@ private void atenderCliente(Socket cliente) {
                     break;
                 }
             }
+
             if (existente == null) {
 
                 pessoa.setEmail(s.gerarEmail(pessoa));
@@ -219,7 +235,6 @@ private void atenderCliente(Socket cliente) {
 
         saida.writeObject(existente);
         saida.flush();
-
         cliente.close();
 
     } catch (Exception e) {
@@ -227,23 +242,6 @@ private void atenderCliente(Socket cliente) {
         log("Erro: " + e.getMessage());
     }
 }
-
-
-private void adicionarTabela(Pessoa pessoa) {
-
-        modelo.addRow(new Object[]{
-            pessoa.getNome(),
-            pessoa.getDataNascimento(),
-            pessoa.getEmail()
-        });
-
-}
-
-private void log(String texto) {
-        logTxtA.append(texto + "\n");
-}
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

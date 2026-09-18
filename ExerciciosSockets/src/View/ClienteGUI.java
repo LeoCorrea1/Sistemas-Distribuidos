@@ -57,6 +57,7 @@ public class ClienteGUI extends javax.swing.JFrame {
         nomeEnvTxt = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         nomeTxt = new javax.swing.JTextPane();
+        limparbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,13 @@ public class ClienteGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(nomeEnvTxt);
 
         jScrollPane5.setViewportView(nomeTxt);
+
+        limparbtn.setText("Limpar");
+        limparbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +133,10 @@ public class ClienteGUI extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(dataEnvTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(limparbtn)
+                .addGap(398, 398, 398))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +161,9 @@ public class ClienteGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2)
                     .addComponent(dataEnvTxt))
-                .addGap(70, 70, 70))
+                .addGap(28, 28, 28)
+                .addComponent(limparbtn)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -161,7 +175,6 @@ public class ClienteGUI extends javax.swing.JFrame {
         String data = dataTxt.getText();
         nomeEnvTxt.setText(nome);
         DataEnvTxt.setText(data);
-        
 
     try {
 
@@ -174,6 +187,13 @@ public class ClienteGUI extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_enviarBtnActionPerformed
+
+    private void limparbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparbtnActionPerformed
+        nomeEnvTxt.setText("");
+        DataEnvTxt.setText("");
+        emailRecbTxt.setText("");
+
+    }//GEN-LAST:event_limparbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,6 +234,7 @@ public class ClienteGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JButton limparbtn;
     private javax.swing.JTextPane nomeEnvTxt;
     private javax.swing.JLabel nomeLb;
     private javax.swing.JTextPane nomeTxt;

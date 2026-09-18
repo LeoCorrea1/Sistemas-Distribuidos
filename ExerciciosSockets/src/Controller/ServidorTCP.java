@@ -25,6 +25,8 @@ public class ServidorTCP {
     String ano = pessoa.getDataNascimento().substring(6);
 
     return primeiro + "." + ultimo + "." + ano + "@ufn.edu.br";
+    
+    
 }
     
 public synchronized void salvarPessoas(ArrayList<Pessoa> pessoas, String nomeDoTxt) {
@@ -44,6 +46,5 @@ public synchronized void salvarPessoas(ArrayList<Pessoa> pessoas, String nomeDoT
     }
 }
 
-    
-
+  
 }
