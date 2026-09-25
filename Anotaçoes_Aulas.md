@@ -125,6 +125,53 @@ E começamos a ver o conteúdo sobre Sockets
 
 Na aula de hoje foi introduzido a ideia de Server Socket e cliente ( 1:1 ), introduzido a ideia de um minichat = terminal
 
+# Aula 14 (25/09/2026) - COMUNICADOR UDP
+
+Comunicador UDP
+
+Assim como o TCP, o UDP é utilizado para enviar e receber dados e objetos. A principal diferença é que o UDP não estabelece uma conexão antes de enviar os dados.
+
+Autenticador da Google
+
+Foi apresentado o funcionamento de um autenticador semelhante ao Google Authenticator, que utiliza tokens temporários.
+
+O servidor possui um relógio e gera um novo token a cada determinado período. Quando alguém solicita um token, o servidor retorna o token correspondente àquele momento.
+
+Os tokens são alterados periodicamente para aumentar a segurança.
+
+Exercício
+
+Criar um gerador de tokens para usuários.
+
+O servidor deverá possuir dois serviços:
+
+1. Cadastro de usuários
+
+Permitir o cadastro de usuários contendo:
+
+Nome;
+E-mail;
+Token atual.
+
+2. Geração de tokens
+
+Para cada usuário cadastrado, o servidor deverá gerar um novo token a cada 60 segundos.
+
+Quando um usuário solicitar seu token, o servidor deverá retornar o token atual e válido naquele momento.
+
+O token não precisa ser gerado utilizando hashCode. Pode ser utilizado um número aleatório.
+
+Exemplo
+Nome: João
+E-mail: joao@email.com
+Token: 483921
+
+Após 60 segundos:
+
+Nome: João
+E-mail: joao@email.com
+Token: 726154
+
 
 
 
