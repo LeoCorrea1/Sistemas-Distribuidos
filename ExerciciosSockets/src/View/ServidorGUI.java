@@ -23,8 +23,8 @@ public class ServidorGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServidorGUI.class.getName());
     
-private ArrayList<Pessoa> pessoas = new ArrayList<>();
 private DefaultTableModel modelo;       
+private ServidorTCP servidorTCP;
 
     /**
      * Creates new form ServidorGUI
@@ -33,7 +33,9 @@ private DefaultTableModel modelo;
         initComponents();
         modelo = (DefaultTableModel) jTable1.getModel();
 
-    new Thread(() -> iniciarServidor()).start();
+        servidorTCP = new ServidorTCP(this);
+
+        new Thread(() -> servidorTCP.iniciarServidor()).start();
     }
 
     /**
@@ -138,46 +140,22 @@ private DefaultTableModel modelo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void salvarArquivoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarArquivoBtnActionPerformed
-        String nomeDoTXT = nomedoTxt.getText();
-         
-                ServidorTCP s = new ServidorTCP();
-                try{
-                s.salvarPessoas(pessoas,nomeDoTXT);
-                JOptionPane.showMessageDialog(this,"Arquivo Salvo/Atualizado com Sucesso"); 
-                
-                }catch(Exception e) {
-                     JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage()); 
-                }
-    }//GEN-LAST:event_salvarArquivoBtnActionPerformed
-
-private void log(String texto) {
-        logTxtA.append(texto + "\n");
-}
-    
-    private void iniciarServidor() {
+    String nomeDoTXT = nomedoTxt.getText();
 
     try {
-
-        ServerSocket servidor = new ServerSocket(50000);
-
-        logTxtA.append("Servidor iniciado na porta 50000.\n");
-
-        while (true) {
-
-            Socket cliente = servidor.accept();
-
-            logTxtA.append("Cliente conectado.\n");
-
-            new Thread(() -> atenderCliente(cliente)).start();
-        }
+        servidorTCP.salvarPessoas(servidorTCP.getPessoas(), nomeDoTXT);
+        JOptionPane.showMessageDialog(this, "Arquivo Salvo/Atualizado com Sucesso");
 
     } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }       
+    }//GEN-LAST:event_salvarArquivoBtnActionPerformed
 
-        logTxtA.append("Erro: " + e.getMessage() + "\n");
-    }
+public void log(String texto) {
+        logTxtA.append(texto + "\n");
 }
-   
-private void adicionarTabela(Pessoa pessoa) {
+
+public void adicionarTabela(Pessoa pessoa) {
 
         modelo.addRow(new Object[]{
             pessoa.getNome(),
@@ -187,61 +165,6 @@ private void adicionarTabela(Pessoa pessoa) {
 
 } 
    
-private void atenderCliente(Socket cliente) {
-
-    try {
-
-        ObjectInputStream entrada =
-                new ObjectInputStream(cliente.getInputStream());
-
-        Pessoa pessoa = (Pessoa) entrada.readObject();
-
-        Pessoa existente = null;
-        
-        ServidorTCP s = new ServidorTCP();
-
-        synchronized (pessoas) {
-
-            for (Pessoa p : pessoas) {
-
-                if (p.getNome().equalsIgnoreCase(pessoa.getNome())
-                        && p.getDataNascimento().equals(pessoa.getDataNascimento())) {
-
-                    existente = p;
-                    break;
-                }
-            }
-
-            if (existente == null) {
-
-                pessoa.setEmail(s.gerarEmail(pessoa));
-
-                pessoas.add(pessoa);
-
-                adicionarTabela(pessoa);
-
-                log("Pessoa cadastrada: " + pessoa.getNome());
-
-                existente = pessoa;
-               
-            } else {
-
-                log("Pessoa já cadastrada: " + pessoa.getNome());
-            }
-        }
-
-        ObjectOutputStream saida =
-                new ObjectOutputStream(cliente.getOutputStream());
-
-        saida.writeObject(existente);
-        saida.flush();
-        cliente.close();
-
-    } catch (Exception e) {
-
-        log("Erro: " + e.getMessage());
-    }
-}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
