@@ -153,7 +153,7 @@ Nome;
 E-mail;
 Token atual.
 
-2. Geração de tokens
+2. Geração de tokens UDP
 
 Para cada usuário cadastrado, o servidor deverá gerar um novo token a cada 60 segundos.
 
