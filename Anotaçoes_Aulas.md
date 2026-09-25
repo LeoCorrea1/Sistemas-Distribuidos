@@ -121,11 +121,11 @@ Que seria sincronização, locks e etc ( oque eu respondi )
 
 E começamos a ver o conteúdo sobre Sockets
 
-# Aula 11 (04/09/2026) - SERVER SOCKET
+# Aula 11 (04/09/2026) - Server Socket
 
 Na aula de hoje foi introduzido a ideia de Server Socket e cliente ( 1:1 ), introduzido a ideia de um minichat = terminal
 
-# Aula 14 (25/09/2026) - COMUNICADOR UDP
+# Aula 14 (25/09/2026) - Comunicador UDP
 
 Comunicador UDP
 
