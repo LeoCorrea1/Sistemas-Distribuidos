@@ -163,13 +163,13 @@ O token não precisa ser gerado utilizando hashCode. Pode ser utilizado um núme
 
 Exemplo
 Nome: João
-E-mail: joao@email.com
+E-mail: joao...
 Token: 483921
 
 Após 60 segundos:
 
 Nome: João
-E-mail: joao@email.com
+E-mail: joao...
 Token: 726154
 
 
