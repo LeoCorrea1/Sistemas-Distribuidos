@@ -5,19 +5,74 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.ArrayList;
 import java.util.Random;
+import model.Pessoa;
 
 public class ServerUDP {
 
     DatagramSocket socket;
     Random gerador = new Random();
+    private ArrayList<Pessoa> pessoas = new ArrayList<>();
+    private Integer tokenAtual;
+    private long horarioToken;
+    private final long TEMPO_TOKEN = 60000;
+        
+public ArrayList<Pessoa> getPessoas() {
+    return pessoas;
+    }   
 
+private void atenderCliente(DatagramPacket pacote) {
+    try {
+        String mensagem = new String(
+                pacote.getData(), 0, pacote.getLength()
+        );
+        String[] dados = mensagem.split(";");
+
+        if (dados.length != 2) {
+            return;
+        }
+        String nome = dados[0];
+        String email = dados[1];
+        Pessoa pessoa = new Pessoa(nome, email);
+        Pessoa existente = null;
+
+        synchronized (pessoas) {
+            for (Pessoa p : pessoas) {
+                if (p.getNome().equalsIgnoreCase(nome)
+                        && p.getEmail().equals(email)) {
+                    existente = p;
+                    break;
+                }
+            }
+            if (existente == null) {
+                pessoas.add(pessoa);
+                System.out.println("Pessoa cadastrada: " + pessoa.getNome());
+
+                existente = pessoa;
+            } else {
+                System.out.println("Pessoa já cadastrada: " + pessoa.getNome());
+            }
+        }
+        String resposta = existente.getNome() + ";"
+                + existente.getEmail() + ";"
+                + existente.getDataNascimento();
+
+        DatagramPacket retorno = ComunicadorUDP.montaMensagem(
+                resposta,
+                pacote.getAddress().getHostAddress(),
+                pacote.getPort()
+        );
+        ComunicadorUDP.enviaMensagem(socket, retorno);
+
+    } catch (Exception e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
+}
+ 
     public ServerUDP() {
         criaServerSocket();
-
         if (socket == null) {
             return;
         }
-
         System.out.println("Servidor ativo a espera do cliente");
 
         recebeSolicitacoes();
@@ -27,25 +82,22 @@ public class ServerUDP {
         try {
             while (true) {
                 byte[] dados = new byte[1024];
-
                 DatagramPacket pacote = new DatagramPacket(
                         dados, dados.length
                 );
-
                 socket.receive(pacote);
-
                 String mensagem = new String(
                         pacote.getData(), 0, pacote.getLength()
                 );
-
                 System.out.println("Solicitacao recebida: " + mensagem);
-
                 if (mensagem.equals("PEDIR_TOKEN")) {
-                    enviaToken(
-                            pacote.getAddress().getHostAddress(),
-                            pacote.getPort()
-                    );
-                }
+                enviaToken(
+                        pacote.getAddress().getHostAddress(),
+                        pacote.getPort()
+                );
+            } else {
+                atenderCliente(pacote);
+            }
             }
         } catch (Exception ex) {
             System.out.println("Erro ao receber solicitacao: " + ex.getMessage());
@@ -57,29 +109,26 @@ public class ServerUDP {
     }
 
     private void enviaToken(String endereco, int porta) {
-        ArrayList<Integer> lista = new ArrayList<>();
+    try {
+        long agora = System.currentTimeMillis();
 
-        for (int i = 1; i <= 100000; i++) {
-            lista.add(i);
+        if (tokenAtual == null || agora - horarioToken >= TEMPO_TOKEN) {
+            tokenAtual = gerador.nextInt(100000) + 1;
+            horarioToken = agora;
+            System.out.println("Novo token gerado: " + tokenAtual);
         }
 
-        Integer token = lista.get(gerador.nextInt(lista.size()));
+        DatagramPacket pacote = ComunicadorUDP.montaMensagem(
+                String.valueOf(tokenAtual), endereco, porta
+        );
 
-        try {
-            Thread.sleep(5000);
+        ComunicadorUDP.enviaMensagem(socket, pacote);
+        System.out.println("Token enviado: " + tokenAtual);
 
-            DatagramPacket pacote = ComunicadorUDP.montaMensagem(
-                    String.valueOf(token), endereco, porta
-            );
-
-            ComunicadorUDP.enviaMensagem(socket, pacote);
-
-            System.out.println("Token enviado: " + token);
-
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+    } catch (Exception ex) {
+        System.out.println("Erro ao enviar token: " + ex.getMessage());
     }
+}
 
     private void criaServerSocket() {
         try {

@@ -4,8 +4,6 @@
  */
 package View;
 
-
-import ex1.ClienteUDP;
 import ex1.ComunicadorUDP;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -18,8 +16,7 @@ public class ClienteGUI extends javax.swing.JFrame {
         initComponents();
   
     }
-
-    DatagramSocket socket;
+                   DatagramSocket socket;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -172,15 +169,55 @@ public class ClienteGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarBtnActionPerformed
-        ClienteUDP c = new ClienteUDP();
-        String nome = nomeTxt.getText();
-        String email = emailTxt.getText();
-        nomeEnvTxt.setText(nome);
-        EmailEnvTxt.setText(email);
-        c.criaClientSocket();
-        
+    String nome = nomeTxt.getText().trim();
+    String email = emailTxt.getText().trim();
 
-        
+    if (nome.isEmpty() || email.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, "Preencha o nome e o email."
+        );
+        return;
+    }
+
+    try (DatagramSocket socket = new DatagramSocket()) {
+        socket.setSoTimeout(10000);
+
+        String mensagem = nome + ";" + email;
+
+        DatagramPacket pedido = ComunicadorUDP.montaMensagem(
+                mensagem, "localhost", 1234
+        );
+
+        ComunicadorUDP.enviaMensagem(socket, pedido);
+
+        byte[] dados = new byte[1024];
+        DatagramPacket resposta = new DatagramPacket(
+                dados, dados.length
+        );
+
+        socket.receive(resposta);
+
+        String retorno = new String(
+                resposta.getData(), 0, resposta.getLength()
+        );
+
+        String[] campos = retorno.split(";", -1);
+
+        if (campos.length >= 2) {
+            nomeEnvTxt.setText(campos[0]);
+            EmailEnvTxt.setText(campos[1]);
+        }
+
+    } catch (java.net.SocketTimeoutException ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, "O servidor não respondeu."
+        );
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, "Erro ao enviar: " + ex.getMessage()
+        );
+    }
+
     }//GEN-LAST:event_enviarBtnActionPerformed
 
     private void limparbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparbtnActionPerformed
@@ -191,32 +228,33 @@ public class ClienteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_limparbtnActionPerformed
 
     private void btnTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokenActionPerformed
-    
-            try {
-                DatagramPacket pedido = ComunicadorUDP.montaMensagem(
-                        "PEDIR_TOKEN", "localhost", 1234
-                );
 
-                ComunicadorUDP.enviaMensagem(socket, pedido);
+    try (DatagramSocket socket = new DatagramSocket()) {
+        DatagramPacket pedido = ComunicadorUDP.montaMensagem(
+                "PEDIR_TOKEN", "localhost", 1234
+        );
 
-                byte[] dados = new byte[1024];
-                DatagramPacket resposta = new DatagramPacket(
-                        dados, dados.length
-                );
+        socket.setSoTimeout(10000);
+        ComunicadorUDP.enviaMensagem(socket, pedido);
 
-                socket.setSoTimeout(10000);
-                socket.receive(resposta);
+        byte[] dados = new byte[1024];
+        DatagramPacket resposta = new DatagramPacket(
+                dados, dados.length
+        );
 
-                String token = new String(
-                        resposta.getData(), 0, resposta.getLength()
-                );
+        socket.receive(resposta);
 
-                System.out.println("Token recebido: " + token);
+        String token = new String(
+                resposta.getData(), 0, resposta.getLength()
+        );
 
-            } catch (Exception ex) {
-                System.out.println("Erro ao receber token: " + ex.getMessage());
-            }
+        tokenRecbTxt.setText(token);
 
+    } catch (java.net.SocketTimeoutException ex) {
+        tokenRecbTxt.setText("Tempo esgotado: servidor não respondeu.");
+    } catch (Exception ex) {
+        System.out.println("Erro ao receber token: " + ex.getMessage());
+    }
     }//GEN-LAST:event_btnTokenActionPerformed
 
     /**
