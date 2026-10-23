@@ -23,18 +23,12 @@ public class ClienteGUI extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         tokenRecbTxt = new javax.swing.JTextPane();
-        dataEnvTxt = new javax.swing.JScrollPane();
-        EmailEnvTxt = new javax.swing.JTextPane();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nomeLb = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         emailTxt = new javax.swing.JTextPane();
         enviarBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        nomeEnvTxt = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         nomeTxt = new javax.swing.JTextPane();
         limparbtn = new javax.swing.JButton();
@@ -45,16 +39,9 @@ public class ClienteGUI extends javax.swing.JFrame {
         tokenRecbTxt.setEditable(false);
         jScrollPane2.setViewportView(tokenRecbTxt);
 
-        EmailEnvTxt.setEditable(false);
-        dataEnvTxt.setViewportView(EmailEnvTxt);
-
-        jLabel2.setText("Nome completo enviado");
-
         jLabel3.setText("Token Recebido");
 
         nomeLb.setText("Digite seu nome completo : ");
-
-        jLabel4.setText("Email Enviado :");
 
         jLabel1.setText("Digite Seu Email :");
 
@@ -66,9 +53,6 @@ public class ClienteGUI extends javax.swing.JFrame {
                 enviarBtnActionPerformed(evt);
             }
         });
-
-        nomeEnvTxt.setEditable(false);
-        jScrollPane1.setViewportView(nomeEnvTxt);
 
         jScrollPane5.setViewportView(nomeTxt);
 
@@ -94,42 +78,28 @@ public class ClienteGUI extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel2)
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel3)
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane4))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nomeLb)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane5)))
-                                .addGap(18, 18, 18)
-                                .addComponent(enviarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dataEnvTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(73, 73, 73))))
+                        .addComponent(nomeLb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(enviarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(436, 436, 436)
+                        .addGap(403, 403, 403)
                         .addComponent(limparbtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(btnToken, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(140, 140, 140)
+                        .addComponent(btnToken, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel3)
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,21 +118,16 @@ public class ClienteGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(btnToken, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(dataEnvTxt)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(limparbtn)
-                .addGap(18, 18, 18))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnToken, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,46 +166,50 @@ public class ClienteGUI extends javax.swing.JFrame {
                 resposta.getData(), 0, resposta.getLength()
         );
 
-        String[] campos = retorno.split(";", -1);
-
-        if (campos.length >= 2) {
-            nomeEnvTxt.setText(campos[0]);
-            EmailEnvTxt.setText(campos[1]);
+        if (retorno.startsWith("ERRO;")) {
+            String[] partesErro = retorno.split(";", 2);
+            String mensagemErro = (partesErro.length > 1) ? partesErro[1] : "Erro desconhecido";
+            
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, mensagemErro, "Erro no Cadastro", javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
         }
+        javax.swing.JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
 
-    } catch (java.net.SocketTimeoutException ex) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this, "O servidor não respondeu."
-        );
     } catch (Exception ex) {
         javax.swing.JOptionPane.showMessageDialog(
                 this, "Erro ao enviar: " + ex.getMessage()
         );
     }
-
     }//GEN-LAST:event_enviarBtnActionPerformed
 
     private void limparbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparbtnActionPerformed
-        nomeEnvTxt.setText("");
-        EmailEnvTxt.setText("");
+        nomeTxt.setText("");
+        emailTxt.setText("");
         tokenRecbTxt.setText("");
 
     }//GEN-LAST:event_limparbtnActionPerformed
 
     private void btnTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTokenActionPerformed
+      String nome = nomeTxt.getText().trim();
+    
+    if (nome.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Digite seu nome primeiro para pedir o token!");
+        return;
+    }
 
     try (DatagramSocket socket = new DatagramSocket()) {
+        String mensagem = "PEDIR_TOKEN;" + nome;
         DatagramPacket pedido = ComunicadorUDP.montaMensagem(
-                "PEDIR_TOKEN", "localhost", 1234
+                mensagem, "localhost", 1234
         );
 
         socket.setSoTimeout(10000);
         ComunicadorUDP.enviaMensagem(socket, pedido);
 
         byte[] dados = new byte[1024];
-        DatagramPacket resposta = new DatagramPacket(
-                dados, dados.length
-        );
+        DatagramPacket resposta = new DatagramPacket(dados, dados.length);
 
         socket.receive(resposta);
 
@@ -283,21 +252,15 @@ public class ClienteGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane EmailEnvTxt;
     private javax.swing.JButton btnToken;
-    private javax.swing.JScrollPane dataEnvTxt;
     private javax.swing.JTextPane emailTxt;
     private javax.swing.JButton enviarBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton limparbtn;
-    private javax.swing.JTextPane nomeEnvTxt;
     private javax.swing.JLabel nomeLb;
     private javax.swing.JTextPane nomeTxt;
     private javax.swing.JTextPane tokenRecbTxt;

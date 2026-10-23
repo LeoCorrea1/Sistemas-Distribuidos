@@ -29,14 +29,6 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -49,7 +41,6 @@ public class Pessoa implements Serializable {
     public String toString() {
         return "Pessoa{" +
                 "nome='" + nome + '\'' +
-                ", dataNascimento='" + dataNascimento + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
