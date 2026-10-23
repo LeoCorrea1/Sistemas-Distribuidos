@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.util.Iterator;
 import java.util.LinkedList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import util.ComunicadorUDP;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -23,6 +22,9 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
 
     public JFrame_chatMulticast() {
         initComponents();
+
+        mdl.addElement("Todos");
+        jList_usuariosOnline.setModel(mdl);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +46,8 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
         jButton_Conectar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList_usuariosOnline = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +101,10 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList_usuariosOnline);
 
+        jLabel1.setText("CHAT");
+
+        jLabel2.setText("Usuarios");
+
         javax.swing.GroupLayout jPanel_ChatLayout = new javax.swing.GroupLayout(jPanel_Chat);
         jPanel_Chat.setLayout(jPanel_ChatLayout);
         jPanel_ChatLayout.setHorizontalGroup(
@@ -123,17 +131,37 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
                 .addComponent(jTextField_textoDeEnvio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Enviar))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jScrollPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ChatLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ChatLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(249, 249, 249))
         );
         jPanel_ChatLayout.setVerticalGroup(
             jPanel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_ChatLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_ChatLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(1, 1, 1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ChatLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_ChatLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_ChatLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)))
                 .addGroup(jPanel_ChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_textoDeEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Enviar))
@@ -166,87 +194,101 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// Classe simples para guardar Nick e IP
-class Usuario {
-    String nick;
-    String ip;
+    private void atualizarUsuarios() {
+        jList_usuariosOnline.setModel(mdl);
+    }
+    
+   private void adicionarUsuario(String nick) {
+    if (nick.isEmpty() || nick.equals(jTextField_Nick.getText().trim())) {
+        return;
+    }
 
-    public Usuario(String nick, String ip) {
-        this.nick = nick;
-        this.ip = ip;
+    if (!nicks.contains(nick)) {
+        nicks.add(nick);
+        mdl.addElement(nick);
     }
 }
-
-// Lista para guardar os usuários conectados
-LinkedList<Usuario> listaUsuarios = new LinkedList<>();
+    
     /**
      * classe interna que garante que o processo de ler/ouvir mensagens seja executado concomitantemente
      */
-    class ThreadReceptora extends Thread {
-        @Override
-        public void run() {
-            JFrame meuFrame = JFrame_chatMulticast.this;
-            while (true) {
-                try {
-                    // Recebe o pacote UDP
-                    DatagramPacket pacote = ComunicadorUDP.recebeMensagem(socket);
-                    if (pacote == null) continue;
+class ThreadReceptora extends Thread {
 
-                    String msgRecebida = new String(pacote.getData(), 0, pacote.getLength());
-                    
-                    // Pega o IP de quem enviou a mensagem
-                    String ipRemetente = pacote.getAddress().getHostAddress();
+    @Override
+    public void run() {
+        while (!socket.isClosed()) {
+            try {
+                DatagramPacket pacote = ComunicadorUDP.recebeMensagem(socket);
+                String msg = new String(pacote.getData(), 0, pacote.getLength()).trim();
+                String meuNick = jTextField_Nick.getText().trim();
 
-                    // Se a mensagem for de entrada ("fulano entrou na sala"), gerencia a lista de usuários
-                    if (msgRecebida.contains(" entrou na sala")) {
-                        String nickEntrada = msgRecebida.replace(" entrou na sala", "").trim();
-                        
-                        // Não adiciona a si mesmo na lista de outros usuários se não quiser, 
-                        // mas para simplificar, verificamos se já existe na lista
-                        boolean jaExiste = false;
-                        for (Usuario u : listaUsuarios) {
-                            if (u.nick.equals(nickEntrada)) {
-                                jaExiste = true;
-                                break;
-                            }
-                        }
-                        
-                        if (!jaExiste) {
-                            listaUsuarios.add(new Usuario(nickEntrada, ipRemetente));
-                            
-                            // Atualiza o componente visual jList_usuariosOnline na Event Dispatch Thread (boa prática no Swing)
-                            javax.swing.SwingUtilities.invokeLater(() -> {
-                                javax.swing.DefaultListModel<String> modelo = new javax.swing.DefaultListModel<>();
-                                modelo.addElement("Todos");
-                                for (Usuario u : listaUsuarios) {
-                                    modelo.addElement(u.nick);
-                                }
-                                jList_usuariosOnline.setModel(modelo);
-                            });
-                        }
+                if (msg.startsWith("ENTROU:")) {
+                    String nick = msg.substring(7).trim();
+
+                    adicionarUsuario(nick);
+
+                    if (!nick.equals(meuNick)) {
+                        jTextArea_Mensagens.append(
+                            nick + " entrou na sala\n"
+                        );
+
+                        String resposta = "USUARIO:" + meuNick;
+
+                        DatagramPacket pacoteResposta = ComunicadorUDP.montaMensagem(
+                            resposta,
+                            jTextField_GrupoIP.getText(),
+                            Integer.parseInt(jTextField_Porta.getText())
+                        );
+
+                        socket.send(pacoteResposta);
                     }
 
-                    // Adiciona a mensagem recebida na lista de mensagens do chat
-                    lista.add(msgRecebida);
-                    Iterator i = lista.iterator();
-                    jTextArea_Mensagens.setText("");
-                    while (i.hasNext()) {
-                        jTextArea_Mensagens.append(i.next().toString() + "\n");
+                } else if (msg.startsWith("USUARIO:")) {
+                    String nick = msg.substring(8).trim();
+
+                    adicionarUsuario(nick);
+
+                } else if (msg.startsWith("PV:")) {
+                    String[] partes = msg.split(":", 4);
+
+                    if (partes.length == 4
+                            && partes[1].trim().equals(meuNick)) {
+                        jTextArea_Mensagens.append(
+                            "(Recebido PV do " + partes[2] + "): "
+                            + partes[3] + "\n"
+                        );
                     }
-                    
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(meuFrame, e.getMessage());
+
+                } else if (msg.contains("saiu da sala")) {
+                    String nick = msg.split(" saiu da sala")[0].trim();
+
+                    nicks.remove(nick);
+                    mdl.removeElement(nick);
+
+                    jTextArea_Mensagens.append(
+                        nick + " saiu da sala\n"
+                    );
+
+                } else {
+                    jTextArea_Mensagens.append(msg + "\n");
                 }
+
+            } catch (IOException e) {
+                if (!socket.isClosed()) {
+                    e.printStackTrace();
+                }
+
+                break;
             }
         }
     }
-
+}
     /**
      * método privado que avisa que um computador saiu do grupo e encerra a conexão
      * @throws IOException
      * @throws NumberFormatException
      * @throws NullPointerException 
-     */
+     */                                             
     private void sairDoSistema() throws IOException, NumberFormatException, NullPointerException {
         try {
             String msg = jTextField_Nick.getText() + " saiu da sala";
@@ -271,39 +313,54 @@ LinkedList<Usuario> listaUsuarios = new LinkedList<>();
      * @param evt contém o evento recebido pelo tratador
      */
     private void jButton_ConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConectarActionPerformed
-        jTextField_GrupoIP.getText();
-        jTextField_Porta.getText();
-        try {
-            if (jTextField_Nick.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Preencha seu nick");
-            } else {
-                //DEFINO O IP DO GRUPO
-                grupo = InetAddress.getByName(jTextField_GrupoIP.getText());
-                
-                //CRIO O SOCKET MULTICAST COM A PORTA ESPECIFICADA
-                socket = new MulticastSocket(Integer.parseInt(jTextField_Porta.getText()));
-                
-                //ENTRA NO GRUPO MULTICAST PARA RECEBER AS MENSAGENS
-                socket.joinGroup(grupo);
-                
-                //CRIO A THREAD PARA RECEBER AS MENSAGENS
-                ThreadReceptora tR = new ThreadReceptora();
-                tR.start();
-                
-                JOptionPane.showMessageDialog(this, "Conectado com sucesso!");
-                jButton_Conectar.setEnabled(false);
-                jTextField_Nick.setEnabled(false);
-                jTextField_GrupoIP.setEnabled(false);
-                jTextField_Porta.setEnabled(false);
+    try {
+        String meuNick = jTextField_Nick.getText().trim();
 
-                String msg = jTextField_Nick.getText() + " entrou na sala";
-                DatagramPacket pacote = ComunicadorUDP.montaMensagem(msg, jTextField_GrupoIP.getText(), Integer.parseInt(jTextField_Porta.getText()));
-                socket.send(pacote);
-                jTextField_textoDeEnvio.requestFocus();
-            }
-        } catch (HeadlessException | IOException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        if (meuNick.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha seu nick");
+            return;
         }
+
+        grupo = InetAddress.getByName(
+            jTextField_GrupoIP.getText().trim()
+        );
+
+        socket = new MulticastSocket(
+            Integer.parseInt(jTextField_Porta.getText().trim())
+        );
+
+        socket.joinGroup(grupo);
+
+        ThreadReceptora tR = new ThreadReceptora();
+        tR.start();
+
+        jButton_Conectar.setEnabled(false);
+        jTextField_Nick.setEnabled(false);
+        jTextField_GrupoIP.setEnabled(false);
+        jTextField_Porta.setEnabled(false);
+
+        String msg = "ENTROU:" + meuNick;
+
+        DatagramPacket pacote = ComunicadorUDP.montaMensagem(
+            msg,
+            jTextField_GrupoIP.getText(),
+            Integer.parseInt(jTextField_Porta.getText())
+        );
+
+        socket.send(pacote);
+
+        jTextArea_Mensagens.append(
+            meuNick + " entrou na sala\n"
+        );
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Conectado com sucesso!"
+        );
+
+    } catch (HeadlessException | IOException | NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
     }//GEN-LAST:event_jButton_ConectarActionPerformed
    
     /**
@@ -313,48 +370,57 @@ LinkedList<Usuario> listaUsuarios = new LinkedList<>();
      * @throws NumberFormatException
      * @throws NullPointerException 
      */
+
     private void enviarMsg() throws IOException, NumberFormatException, NullPointerException {
-        try {
-        String destinatario = jList_usuariosOnline.getSelectedValue();
-        String texto = jTextField_textoDeEnvio.getText();
-        String meuNick = jTextField_Nick.getText();
-        int porta = Integer.parseInt(jTextField_Porta.getText());
+        String texto = jTextField_textoDeEnvio.getText().trim();
 
-        String ipDestino;
-        String mensagemFinal;
+        if (texto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escreva algo");
+            return;
+        }
 
-        // Se nada estiver selecionado ou for "Todos", envia no Multicast normal
-        if (destinatario == null || destinatario.equals("Todos")) {
-            ipDestino = jTextField_GrupoIP.getText();
-            mensagemFinal = meuNick + ": " + texto;
+        if (socket == null || socket.isClosed()) {
+            JOptionPane.showMessageDialog(this, "Conecte primeiro");
+            return;
+        }
+
+        String nick = jTextField_Nick.getText().trim();
+        String destino = jList_usuariosOnline.getSelectedValue();
+        int porta = Integer.parseInt(jTextField_Porta.getText().trim());
+
+        if (destino == null || destino.equals("Todos")) {
+            String msg = nick + ": " + texto;
+
+            DatagramPacket pacote = ComunicadorUDP.montaMensagem(
+                msg,
+                jTextField_GrupoIP.getText(),
+                porta
+            );
+
+            socket.send(pacote);
+
         } else {
-            // Procura o IP do usuário selecionado na nossa lista de usuários
-            ipDestino = null;
-            for (Usuario u : listaUsuarios) {
-                if (u.nick.equals(destinatario)) {
-                    ipDestino = u.ip;
-                    break;
-                }
-            }
-
-            if (ipDestino == null) {
-                JOptionPane.showMessageDialog(this, "IP do usuário não encontrado na lista.");
+            if (!nicks.contains(destino)) {
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado");
                 return;
             }
 
-            mensagemFinal = "[PV] " + meuNick + ": " + texto;
-            jTextArea_Mensagens.append("(Para " + destinatario + ") " + mensagemFinal + "\n");
+            String msg = "PV:" + destino + ":" + nick + ":" + texto;
+
+            DatagramPacket pacote = ComunicadorUDP.montaMensagem(
+                msg,
+                jTextField_GrupoIP.getText(),
+                porta
+            );
+            socket.send(pacote);
+
+            jTextArea_Mensagens.append(
+                "(PV para " + destino + "): " + texto + "\n"
+            );
         }
 
-        // Envia o pacote (seja para o grupo Multicast ou direto para o IP privado)
-        DatagramPacket pacote = ComunicadorUDP.montaMensagem(mensagemFinal, ipDestino, porta);
-        socket.send(pacote);
-        
         jTextField_textoDeEnvio.setText("");
-        
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao enviar: " + e.getMessage());
-    }
+        jTextField_textoDeEnvio.requestFocus();
     }
 
     /**
@@ -442,12 +508,15 @@ LinkedList<Usuario> listaUsuarios = new LinkedList<>();
 
     InetAddress grupo;
     MulticastSocket socket;
-    LinkedList<String> lista = new LinkedList<>();
+    LinkedList<String> nicks = new LinkedList<>();
+    DefaultListModel<String> mdl = new DefaultListModel<>();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Conectar;
     private javax.swing.JButton jButton_Enviar;
     private javax.swing.JButton jButton_Sair;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_Nick;
     private javax.swing.JLabel jLabel_Porta;
     private javax.swing.JLabel jLabel_ServidorIP;
