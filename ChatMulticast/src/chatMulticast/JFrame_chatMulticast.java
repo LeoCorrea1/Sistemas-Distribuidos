@@ -208,10 +208,6 @@ public class JFrame_chatMulticast extends javax.swing.JFrame {
         mdl.addElement(nick);
     }
 }
-    
-    /**
-     * classe interna que garante que o processo de ler/ouvir mensagens seja executado concomitantemente
-     */
 class ThreadReceptora extends Thread {
 
     @Override
@@ -282,13 +278,7 @@ class ThreadReceptora extends Thread {
             }
         }
     }
-}
-    /**
-     * método privado que avisa que um computador saiu do grupo e encerra a conexão
-     * @throws IOException
-     * @throws NumberFormatException
-     * @throws NullPointerException 
-     */                                             
+}                                      
     private void sairDoSistema() throws IOException, NumberFormatException, NullPointerException {
         try {
             String msg = jTextField_Nick.getText() + " saiu da sala";
@@ -306,12 +296,6 @@ class ThreadReceptora extends Thread {
         }
     }
 
-    /**
-     * método privado que realiza a conexão do computador em um grupo multicast,
-     * tendo como referência endereço virtual do grupo e a porta do socket. O processo de escuta/leitura
-     * é circundado por thread de leitura
-     * @param evt contém o evento recebido pelo tratador
-     */
     private void jButton_ConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConectarActionPerformed
     try {
         String meuNick = jTextField_Nick.getText().trim();
@@ -362,14 +346,6 @@ class ThreadReceptora extends Thread {
         JOptionPane.showMessageDialog(this, e.getMessage());
     }
     }//GEN-LAST:event_jButton_ConectarActionPerformed
-   
-    /**
-     * método privado que captura a mensagem escrita na caixa de texto mais o apelido da caixa de texto nick
-     * monta a mensagem e a envia ao grupo
-     * @throws IOException
-     * @throws NumberFormatException
-     * @throws NullPointerException 
-     */
 
     private void enviarMsg() throws IOException, NumberFormatException, NullPointerException {
         String texto = jTextField_textoDeEnvio.getText().trim();
@@ -423,10 +399,6 @@ class ThreadReceptora extends Thread {
         jTextField_textoDeEnvio.requestFocus();
     }
 
-    /**
-     * método privado que trata o envio de mensagens escritas na caixa de texto de mensagens 
-     * @param evt contém o evento recebido pelo tratador
-     */
     private void jButton_EnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EnviarActionPerformed
         try {
             this.enviarMsg();
@@ -436,10 +408,6 @@ class ThreadReceptora extends Thread {
         }
     }//GEN-LAST:event_jButton_EnviarActionPerformed
 
-    /**
-     * método privado que trata o evento do botão sair, ou seja, finaliza o sistema
-     * @param evt contém o evento recebido pelo tratador
-     */
     private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SairActionPerformed
         try {
             this.sairDoSistema();
@@ -448,10 +416,6 @@ class ThreadReceptora extends Thread {
         }
     }//GEN-LAST:event_jButton_SairActionPerformed
 
-    /**
-     * método privado que trata o pressionamento das teclas Enter ou Esc quando o foco estiver na caixa de envio de texto
-     * @param evt contém o evento recebido pelo tratador
-     */
     private void jTextField_textoDeEnvioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_textoDeEnvioKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
