@@ -125,57 +125,79 @@ E começamos a ver o conteúdo sobre Sockets
 
 Na aula de hoje foi introduzido a ideia de Server Socket e cliente ( 1:1 ), introduzido a ideia de um minichat = terminal
 
+# Aula 13 (14-19/09/2026) - Trabalho Prático UDP
+
+**Trabalho Cliente-Servidor UDP**
+- Desenvolvimento de aplicação com interface gráfica (Java Swing).
+- Comunicação utilizando protocolo UDP.
+- Cadastro de usuários:
+  - Nome completo e e-mail;
+  - Armazenamento utilizando a classe Pessoa;
+  - Impedir cadastros duplicados.
+
+**Tokens**
+- Geração de tokens aleatórios pelo servidor.
+- Validade de 60 segundos.
+- Manter o mesmo token enquanto estiver válido.
+- Gerar outro após a expiração.
+
 # Aula 14 (25/09/2026) - Comunicador UDP
 
 **Comunicador UDP**
 
 Assim como o TCP, o UDP é utilizado para enviar e receber dados e objetos. A principal diferença é que o UDP não estabelece uma conexão antes de enviar os dados.
 
-**Autenticador da Google**
+# Aula 15 (28/09-02/10/2026) - RPC e RMI
 
-Foi apresentado o funcionamento de um autenticador semelhante ao Google Authenticator, que utiliza tokens temporários.
+**RPC (Remote Procedure Call)**
+- Comunicação entre computadores para solicitar serviços remotamente.
+- Funcionamento semelhante a uma API.
+- Exemplos em Python.
+- Procedure (void) e Function (return).
 
-O servidor possui um relógio e gera um novo token a cada determinado período. Quando alguém solicita um token, o servidor retorna o token correspondente àquele momento.
+**RMI (Remote Method Invocation)**
+- Chamada de métodos de objetos Java remotamente.
 
-Os tokens são alterados periodicamente para aumentar a segurança.
+**gRPC**
+- Introdução à comunicação utilizando C#.
 
-**Exercício**
+# Aula 16 (05-09/10/2026) - RMI e Multicast
 
-Criar um gerador de tokens para usuários.
+**Atividade RMI**
+- Cliente envia o nome completo.
+- Servidor gera o e-mail e cria o objeto Pessoa.
+- Retorno do e-mail ao cliente.
 
-O servidor deverá possuir dois serviços:
+# Aula 17 (14-16/10/2026) - Revisão e Desafio Telefonia
 
-- 1. Cadastro de usuários
+**Cliente-Servidor**
+- Revisão de TCP/IP, IP, domínio, portas e sockets.
+- Socket e ServerSocket.
+- Leitor e escritor.
+- Serialização e Threads.
 
-Permitir o cadastro de usuários contendo:
+**RPC e RMI**
+- Revisão de RPC em Python.
+- RMI em Java (Interface, Classe, Servidor e Cliente).
 
-Nome;
-E-mail;
-Token atual.
+**Desafio Telefonia**
+- Refazer o exercício de telefonia utilizando HashMap.
+- Leitura da base de sessões (Base.txt).
+- Armazenamento dos dados de sessão e celular.
+- Servidor mantém a base de dados.
+- Cliente pesquisa o número do celular e recebe as informações da sessão.
+- Utilização de RMI, RPC ou tecnologias semelhantes.
 
-- 2. Geração de tokens UDP
+# Aula 18 (26/10/2026) - Multicast e JGroups
 
-Para cada usuário cadastrado, o servidor deverá gerar um novo token a cada 60 segundos.
+**Multicast**
+- Implementação em Java, Python e C#.
+- Protocolo UDP.
+- IP do grupo (Classe D).
+- Arquitetura Ponto-a-Ponto.
 
-Quando um usuário solicitar seu token, o servidor deverá retornar o token atual e válido naquele momento.
-
-O token não precisa ser gerado utilizando hashCode. Pode ser utilizado um número aleatório.
-
-Exemplo
-Nome: João
-E-mail: joao...
-Token: 483921
-
-Após 60 segundos:
-
-Nome: João
-E-mail: joao...
-Token: 726154
-
-
-
-
-
+**JGroups**
+- Introdução à tecnologia JGroups.
 
 
 
