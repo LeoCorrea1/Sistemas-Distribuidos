@@ -199,6 +199,19 @@ Assim como o TCP, o UDP é utilizado para enviar e receber dados e objetos. A pr
 **JGroups**
 - Introdução à tecnologia JGroups.
 
+- 
+# Aula 18 (06/11/2026) - Novo desafio ( 3 )
+
+- Introduçao ao desafio de encurtar URL, no github do sor
+- Apresentaçoes dos alunos que nao entregaram o desafio 2
+
+# Aula 19 (09/11/2026) - apresentaçoes e fazendo o ultimo desafio
+
+- fiquei a aula fazendo o ultimo desafio
+
+
+
+
 
 
   
